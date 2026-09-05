@@ -1,0 +1,42 @@
+spring:
+  data:
+    redis:
+      host: 100.92.228.9
+      port: 30379
+      password:
+      database: 0
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+  datasource:
+    url: jdbc:postgresql://100.92.228.9:30432/shemhazaicraft
+    username: postgres
+    password: Dimas123
+    hikari:
+      auto-commit: true
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+
+minio:
+  url: http://100.92.228.9:30903
+  access-key: loki
+  secret-key: supersecret
+  bucket-name: shemhazaicraft

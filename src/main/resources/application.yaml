@@ -1,3 +1,7 @@
 spring:
   application:
     name: ShemhazaiCraft
+  profiles:
+    active: dev
+
+

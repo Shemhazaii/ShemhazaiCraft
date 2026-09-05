@@ -1,4 +1,12 @@
 package com.shemhazaicraft.api.server.status;
 
-public class ServerStatusServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ServerStatusServiceImpl implements ServerStatusService{
+
+    @Override
+    public void checkAllServers() {
+
+    }
 }

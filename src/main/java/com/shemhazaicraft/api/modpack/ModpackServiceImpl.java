@@ -1,4 +1,4 @@
 package com.shemhazaicraft.api.modpack;
 
-public class ModpackServiceImpl {
+public class ModpackServiceImpl implements ModpackService{
 }

@@ -1,4 +1,4 @@
 package com.shemhazaicraft.api.news;
 
-public class NewsServiceImpl {
+public class NewsServiceImpl implements NewsService{
 }

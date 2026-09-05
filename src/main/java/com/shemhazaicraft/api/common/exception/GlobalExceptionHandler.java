@@ -1,4 +1,4 @@
-package com.shemhazaicraft.api.common;
+package com.shemhazaicraft.api.common.exception;
 
 public class GlobalExceptionHandler {
 }

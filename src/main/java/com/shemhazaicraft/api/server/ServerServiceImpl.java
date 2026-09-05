@@ -1,4 +1,4 @@
 package com.shemhazaicraft.api.server;
 
-public class ServerServiceImpl {
+public class ServerServiceImpl implements ServerService {
 }
