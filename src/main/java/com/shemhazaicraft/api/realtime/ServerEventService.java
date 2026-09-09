@@ -1,4 +1,12 @@
 package com.shemhazaicraft.api.realtime;
 
-public class ServerEventService {
+import com.shemhazaicraft.api.server.status.ServerStatus;
+
+public interface ServerEventService {
+
+    void publishServerStatus(
+            String serverSlug,
+            ServerStatus status
+    );
+
 }

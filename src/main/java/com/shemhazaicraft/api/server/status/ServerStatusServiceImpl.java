@@ -1,6 +1,7 @@
 package com.shemhazaicraft.api.server.status;
 
 import com.shemhazaicraft.api.common.exception.NotFoundException;
+import com.shemhazaicraft.api.realtime.ServerEventService;
 import com.shemhazaicraft.api.server.Server;
 import com.shemhazaicraft.api.server.ServerRepository;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,13 @@ public class ServerStatusServiceImpl implements ServerStatusService{
     private final ServerRepository serverRepository;
     private final MinecraftStatusClient minecraftStatusClient;
     private final ServerStatusCache statusCache;
+    private final ServerEventService eventService;
 
-    public ServerStatusServiceImpl(ServerRepository serverRepository, MinecraftStatusClient minecraftStatusClient, ServerStatusCache statusCache) {
+    public ServerStatusServiceImpl(ServerRepository serverRepository, MinecraftStatusClient minecraftStatusClient, ServerStatusCache statusCache, ServerEventService eventService) {
         this.serverRepository = serverRepository;
         this.minecraftStatusClient = minecraftStatusClient;
         this.statusCache = statusCache;
+        this.eventService = eventService;
     }
 
     @Override
@@ -34,7 +37,11 @@ public class ServerStatusServiceImpl implements ServerStatusService{
 
     private void checkServer(Server server) {
 
-        ServerStatus status =
+        ServerStatus previous =
+                statusCache.get(server.getSlug())
+                        .orElse(null);
+
+        ServerStatus current =
                 minecraftStatusClient.query(
                         server.getHostname(),
                         server.getPort()
@@ -42,7 +49,19 @@ public class ServerStatusServiceImpl implements ServerStatusService{
 
         statusCache.save(
                 server.getSlug(),
-                status
+                current
         );
+
+
+        if (hasMeaningfulChange(previous, current)) {
+            eventService.publishServerStatus(
+                    server.getSlug(),
+                    current
+            );
+        }
+    }
+
+    private boolean hasMeaningfulChange(ServerStatus previous, ServerStatus current){
+        return previous == null || !previous.equals(current);
     }
 }
