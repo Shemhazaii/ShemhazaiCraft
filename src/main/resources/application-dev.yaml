@@ -4,7 +4,7 @@ spring:
       host: 100.92.228.9
       port: 30379
       password:
-      database: 0
+      database: 1
       lettuce:
         pool:
           max-active: 8

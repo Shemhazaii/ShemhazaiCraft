@@ -10,7 +10,10 @@ public class ServerStatusScheduler {
 
     private final ServerStatusService statusService;
 
-    @Scheduled(fixedDelay = 15_000)
+    @Scheduled(
+            fixedDelay = 15_000,
+            initialDelay = 5_000
+    )
     public void checkServers() {
         statusService.checkAllServers();
     }

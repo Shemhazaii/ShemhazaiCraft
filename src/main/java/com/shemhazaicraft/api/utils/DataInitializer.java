@@ -25,32 +25,32 @@ public class DataInitializer implements CommandLineRunner {
         serverService.save(ServerRequest.builder()
                         .slug("minecraft-proxy")
                         .name("Minecraft Proxy")
-                        .hostname("mc.shemhazaicraft.com")
-                        .port(25565)
+                        .hostname("localhost")
+                        .port(30065)
                         .description("Minecraft Proxy Server")
                 .build());
 
         serverService.save(ServerRequest.builder()
                 .slug("minecraft-realcraft")
                 .name("Minecraft Realcraft")
-                .hostname("mc.shemhazaicraft.com")
-                .port(25566)
+                .hostname("localhost")
+                .port(30065)
                 .description("Minecraft Main Server")
                 .build());
 
         serverService.save(ServerRequest.builder()
                 .slug("minecraft-realcraft-exploration")
                 .name("Minecraft Realcraft Exploration")
-                .hostname("mc.shemhazaicraft.com")
-                .port(25567)
+                .hostname("localhost")
+                .port(30065)
                 .description("Minecraft Main Exploration Server")
                 .build());
 
         serverService.save(ServerRequest.builder()
                 .slug("minecraft-cookcraft")
                 .name("Minecraft Cook Craft")
-                .hostname("mc.shemhazaicraft.com")
-                .port(25568)
+                .hostname("localhost")
+                .port(30065)
                 .description("Minecraft Cooking Server")
                 .build());
 

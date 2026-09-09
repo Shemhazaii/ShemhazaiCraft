@@ -3,19 +3,21 @@ package com.shemhazaicraft.api.server.status;
 import java.time.Instant;
 
 public record ServerStatus(
-        boolean online,
+        ServerStatusState state,
         String version,
         int playersOnline,
         int playersMax,
-        long latency
+        long latency,
+        Instant checkedAt
 ) {
     public static ServerStatus offline() {
         return new ServerStatus(
-                false,
+                ServerStatusState.OFFLINE,
                 null,
                 0,
                 0,
-                0
+                0,
+                Instant.now()
         );
     }
 }
