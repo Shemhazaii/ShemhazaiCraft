@@ -1,8 +1,8 @@
-package com.shemhazaicraft.api.modpack;
+package com.shemhazaicraft.api.storage;
 
 import java.io.InputStream;
 
-public interface ModpackStorageService {
+public interface ObjectStorageService {
 
     void upload(
             String objectKey,

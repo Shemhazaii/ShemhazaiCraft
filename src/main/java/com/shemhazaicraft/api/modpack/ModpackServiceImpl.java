@@ -1,6 +1,7 @@
 package com.shemhazaicraft.api.modpack;
 
 import com.shemhazaicraft.api.modpack.model.ModpackResponse;
+import com.shemhazaicraft.api.storage.ObjectStorageService;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,9 +12,9 @@ import java.io.IOException;
 public class ModpackServiceImpl implements ModpackService{
 
     private final ModpackRepository modpackRepository;
-    private final ModpackStorageService storageService;
+    private final ObjectStorageService storageService;
 
-    public ModpackServiceImpl(ModpackRepository modpackRepository, ModpackStorageService storageService) {
+    public ModpackServiceImpl(ModpackRepository modpackRepository, ObjectStorageService storageService) {
         this.modpackRepository = modpackRepository;
         this.storageService = storageService;
     }

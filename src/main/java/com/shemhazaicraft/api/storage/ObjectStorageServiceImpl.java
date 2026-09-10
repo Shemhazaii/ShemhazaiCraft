@@ -1,4 +1,4 @@
-package com.shemhazaicraft.api.modpack;
+package com.shemhazaicraft.api.storage;
 
 import com.shemhazaicraft.api.config.MinioProperties;
 import io.minio.GetPresignedObjectUrlArgs;
@@ -11,12 +11,12 @@ import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class ModpackStorageServiceImpl implements ModpackStorageService{
+public class ObjectStorageServiceImpl implements ObjectStorageService {
 
     private final MinioClient minioClient;
     private final MinioProperties minioProperties;
 
-    public ModpackStorageServiceImpl(MinioClient minioClient, MinioProperties minioProperties) {
+    public ObjectStorageServiceImpl(MinioClient minioClient, MinioProperties minioProperties) {
         this.minioClient = minioClient;
         this.minioProperties = minioProperties;
     }

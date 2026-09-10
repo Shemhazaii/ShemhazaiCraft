@@ -23,6 +23,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/api/v1/modpacks/**").permitAll()
+                        .requestMatchers("/api/v1/servers/**").permitAll()
+                        .requestMatchers("/api/v1/news/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
