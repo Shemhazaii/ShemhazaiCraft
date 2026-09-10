@@ -3,27 +3,23 @@ package com.shemhazaicraft.api.config;
 import io.minio.MinioClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 @Configuration
+@EnableConfigurationProperties(MinioProperties.class)
 public class MinioConfig {
 
-    @Value("${minio.url}")
-    private String minioUrl;
-
-    @Value("${minio.access-key}")
-    private String accessKey;
-
-    @Value("${minio.secret-key}")
-    private String secretKey;
-
     @Bean
-    public MinioClient minioClient() {
+    public MinioClient minioClient(MinioProperties properties) {
         return MinioClient.builder()
-                .endpoint(minioUrl)
-                .credentials(accessKey, secretKey)
+                .endpoint(properties.url())
+                .credentials(
+                        properties.accessKey(),
+                        properties.secretKey()
+                )
                 .build();
     }
 }
