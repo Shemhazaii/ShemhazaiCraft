@@ -20,7 +20,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String @NonNull ... args) throws Exception {
 
-        serverRepository.deleteAll();
+        //serverRepository.deleteAll();
 
 /*
         serverService.save(ServerRequest.builder()

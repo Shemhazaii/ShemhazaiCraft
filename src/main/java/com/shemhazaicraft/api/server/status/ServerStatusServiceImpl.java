@@ -4,6 +4,7 @@ import com.shemhazaicraft.api.common.exception.NotFoundException;
 import com.shemhazaicraft.api.realtime.ServerEventService;
 import com.shemhazaicraft.api.server.Server;
 import com.shemhazaicraft.api.server.ServerRepository;
+import com.shemhazaicraft.api.server.model.ServerStatusResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,19 @@ public class ServerStatusServiceImpl implements ServerStatusService{
         }
     }
 
+    @Override
+    public List<ServerStatusResponse> getAllStatuses() {
+
+        List<ServerStatusResponse> cached = statusCache.getAll();
+        if (!cached.isEmpty()) {
+            return cached;
+        }
+
+        checkAllServers();
+
+        return statusCache.getAll();
+    }
+
     private void checkServer(Server server) {
 
         ServerStatus previous =
@@ -45,14 +59,15 @@ public class ServerStatusServiceImpl implements ServerStatusService{
                 minecraftStatusClient.query(
                         server.getHostname(),
                         server.getPort(),
-                        server.getObjectKey()
+                        server.getObjectKey(),
+                        server.getDescription(),
+                        server.getName()
                 );
 
         statusCache.save(
                 server.getSlug(),
                 current
         );
-
 
         if (hasMeaningfulChange(previous, current)) {
             eventService.publishServerStatus(

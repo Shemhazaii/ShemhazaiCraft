@@ -78,7 +78,9 @@ public class ServerServiceImpl implements ServerService {
         ServerStatus status = minecraftStatusClient.query(
                 server.getHostname(),
                 server.getPort(),
-                server.getObjectKey()
+                server.getObjectKey(),
+                server.getDescription(),
+                server.getName()
         );
 
         statusCache.save(slug, status);

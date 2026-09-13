@@ -9,7 +9,7 @@ import java.time.Instant;
 @Component
 public class MinecraftStatusClientImpl implements MinecraftStatusClient{
 
-    public ServerStatus query(String host, int port, String objectKey) {
+    public ServerStatus query(String host, int port, String objectKey, String description, String server) {
         try {
             MCPingResponse response = MCPing
                     .pingModern()
@@ -19,17 +19,19 @@ public class MinecraftStatusClientImpl implements MinecraftStatusClient{
                     .getSync();
 
             return new ServerStatus(
+                    server,
                     ServerStatusState.ONLINE,
                     response.getVersionName(),
                     response.getOnlinePlayers(),
                     response.getMaxPlayers(),
                     response.getPing(),
                     objectKey,
+                    description,
                     Instant.now()
             );
 
         } catch (Exception e) {
-            return ServerStatus.offline(objectKey);
+            return ServerStatus.offline(objectKey,description,server);
         }
     }
 }
