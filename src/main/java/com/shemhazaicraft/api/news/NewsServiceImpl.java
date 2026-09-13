@@ -3,6 +3,8 @@ package com.shemhazaicraft.api.news;
 import com.shemhazaicraft.api.storage.ObjectStorageService;
 import com.shemhazaicraft.api.news.models.NewsDetailResponse;
 import com.shemhazaicraft.api.news.models.NewsSummaryResponse;
+import com.shemhazaicraft.api.utils.FileUploadUtils;
+import org.springframework.http.MediaTypeFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,12 +36,14 @@ public class NewsServiceImpl implements NewsService{
                         + slug + "/"
                         + picture.getOriginalFilename();
 
+        String contentType = FileUploadUtils.getContentType(picture);
+
         try {
             storageService.upload(
                     objectKey,
                     picture.getInputStream(),
                     picture.getSize(),
-                    picture.getContentType()
+                    contentType
             );
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -26,6 +26,7 @@ public class Server {
 
     private String minecraftVersion;
     private String loader;
+    private String objectKey;
 
     private boolean enabled;
 

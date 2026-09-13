@@ -22,6 +22,7 @@ public class DataInitializer implements CommandLineRunner {
 
         serverRepository.deleteAll();
 
+/*
         serverService.save(ServerRequest.builder()
                         .slug("minecraft-proxy")
                         .name("Minecraft Proxy")
@@ -53,6 +54,7 @@ public class DataInitializer implements CommandLineRunner {
                 .port(30065)
                 .description("Minecraft Cooking Server")
                 .build());
+*/
 
 
 

@@ -4,6 +4,7 @@ package com.shemhazaicraft.api.server.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class ServerRequest {
     private String hostname;
     private int port;
     private String description;
+    private MultipartFile file;
 }

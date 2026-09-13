@@ -7,6 +7,6 @@ import java.time.Instant;
 
 public interface MinecraftStatusClient {
 
- public ServerStatus query(String ip, int port);
+ public ServerStatus query(String ip, int port, String objectKey);
 
 }

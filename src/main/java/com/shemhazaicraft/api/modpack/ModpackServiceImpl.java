@@ -2,6 +2,7 @@ package com.shemhazaicraft.api.modpack;
 
 import com.shemhazaicraft.api.modpack.model.ModpackResponse;
 import com.shemhazaicraft.api.storage.ObjectStorageService;
+import com.shemhazaicraft.api.utils.FileUploadUtils;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,7 @@ public class ModpackServiceImpl implements ModpackService{
     }
 
     @Override
-    public ModpackResponse upload(String name, String version, String minecraftVersion, String loader, MultipartFile file) {
+    public ModpackResponse upload(String name, String description, String version, String minecraftVersion, String loader, MultipartFile file, MultipartFile thumbnail) {
         String slug = name
                 .toLowerCase()
                 .replaceAll("[^a-z0-9]+", "-");
@@ -31,12 +32,28 @@ public class ModpackServiceImpl implements ModpackService{
                         + version + "/"
                         + file.getOriginalFilename();
 
+        String thumbnailObjectKey =
+                "modpacks/"
+                        + slug + "/"
+                        + version + "/"
+                        + "thumbnail" + "/"
+                        + thumbnail.getOriginalFilename();
+
+        String thumbnailContentType = FileUploadUtils.getContentType(thumbnail);
+
         try {
             storageService.upload(
                     objectKey,
                     file.getInputStream(),
                     file.getSize(),
                     file.getContentType()
+            );
+
+            storageService.upload(
+                    thumbnailObjectKey,
+                    thumbnail.getInputStream(),
+                    thumbnail.getSize(),
+                    thumbnailContentType
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -45,6 +62,7 @@ public class ModpackServiceImpl implements ModpackService{
         Modpack modpack = new Modpack();
 
         modpack.setName(name);
+        modpack.setDescription(description);
         modpack.setSlug(slug);
         modpack.setVersion(version);
         modpack.setMinecraftVersion(minecraftVersion);

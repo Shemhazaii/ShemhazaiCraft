@@ -5,6 +5,7 @@ import com.shemhazaicraft.api.modpack.Modpack;
 public record ModpackResponse(
         Long id,
         String name,
+        String description,
         String slug,
         String version,
         String minecraftVersion,
@@ -17,6 +18,7 @@ public record ModpackResponse(
         return new ModpackResponse(
                 modpack.getId(),
                 modpack.getName(),
+                modpack.getDescription(),
                 modpack.getSlug(),
                 modpack.getVersion(),
                 modpack.getMinecraftVersion(),

@@ -22,6 +22,8 @@ public class Modpack {
 
     private String slug;
 
+    private String description;
+
     private String version;
 
     private String minecraftVersion;
@@ -29,6 +31,8 @@ public class Modpack {
     private String loader;
 
     private String fileName;
+
+    private String thumbnailObjectKey;
 
     private String objectKey;
 

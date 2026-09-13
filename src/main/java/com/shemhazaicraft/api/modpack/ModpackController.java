@@ -21,17 +21,21 @@ public class ModpackController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ModpackResponse> upload(
             @RequestParam String name,
+            @RequestParam String description,
             @RequestParam String version,
             @RequestParam String minecraftVersion,
             @RequestParam String loader,
-            @RequestParam("file") MultipartFile file
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("thumbnail") MultipartFile thumbnail
     ) {
         ModpackResponse response = modpackService.upload(
                 name,
+                description,
                 version,
                 minecraftVersion,
                 loader,
-                file
+                file,
+                thumbnail
         );
 
         return ResponseEntity

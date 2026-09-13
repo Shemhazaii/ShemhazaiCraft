@@ -44,7 +44,8 @@ public class ServerStatusServiceImpl implements ServerStatusService{
         ServerStatus current =
                 minecraftStatusClient.query(
                         server.getHostname(),
-                        server.getPort()
+                        server.getPort(),
+                        server.getObjectKey()
                 );
 
         statusCache.save(

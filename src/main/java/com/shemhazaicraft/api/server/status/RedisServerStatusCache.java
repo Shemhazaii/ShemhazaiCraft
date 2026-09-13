@@ -19,13 +19,11 @@ public class RedisServerStatusCache implements ServerStatusCache{
 
     @Override
     public void save(String slug, ServerStatus status) {
-        log.info("Saving server status for slug: {}", slug);
         redis.opsForValue().set(
                 PREFIX + slug,
                 status,
                 Duration.ofSeconds(45)
         );
-        log.info("Server status saved for slug: {}", slug);
     }
 
     @Override
