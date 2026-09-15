@@ -11,7 +11,8 @@ public record ModpackResponse(
         String minecraftVersion,
         String loader,
         String fileName,
-        Long fileSize
+        Long fileSize,
+        String thumbnailObjectKey
 ) {
 
     public static ModpackResponse from(Modpack modpack) {
@@ -24,7 +25,8 @@ public record ModpackResponse(
                 modpack.getMinecraftVersion(),
                 modpack.getLoader(),
                 modpack.getFileName(),
-                modpack.getFileSize()
+                modpack.getFileSize(),
+                modpack.getThumbnailObjectKey()
         );
     }
 }

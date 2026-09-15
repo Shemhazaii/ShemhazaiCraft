@@ -7,6 +7,7 @@ import java.time.Instant;
 public record NewsSummaryResponse(
         Long id,
         String title,
+        String description,
         String slug,
         String thumbnailUrl,
         Instant publishedAt
@@ -15,6 +16,7 @@ public record NewsSummaryResponse(
         return new NewsSummaryResponse(
                 news.getId(),
                 news.getTitle(),
+                news.getDescription(),
                 news.getSlug(),
                 news.getThumbnailObjectKey(),
                 news.getPublishedAt()

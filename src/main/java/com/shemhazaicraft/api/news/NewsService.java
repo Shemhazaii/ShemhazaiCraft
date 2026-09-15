@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface NewsService {
-    NewsDetailResponse save(String title, String content, MultipartFile picture);
+    NewsDetailResponse save(String title,String description, String content, MultipartFile picture);
     void delete(Long id);
     void publish(Long id);
     void unpublish(Long id);

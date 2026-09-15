@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ModpackServiceImpl implements ModpackService{
@@ -69,6 +71,7 @@ public class ModpackServiceImpl implements ModpackService{
         modpack.setLoader(loader);
         modpack.setFileName(file.getOriginalFilename());
         modpack.setObjectKey(objectKey);
+        modpack.setThumbnailObjectKey(thumbnailObjectKey);
         modpack.setFileSize(file.getSize());
 
         modpackRepository.save(modpack);
@@ -89,4 +92,12 @@ public class ModpackServiceImpl implements ModpackService{
                 modpack.getObjectKey()
         );
     }
+
+    @Override
+    public List<ModpackResponse> getLatest() {
+        List<Modpack> modpacksList = modpackRepository.findLatestModpacksGroupBySlug();
+        return modpacksList.stream().map(ModpackResponse::from).toList();
+    }
+
+
 }

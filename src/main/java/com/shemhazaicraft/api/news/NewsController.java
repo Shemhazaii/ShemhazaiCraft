@@ -21,10 +21,11 @@ public class NewsController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<NewsDetailResponse> save(
             @RequestParam String title,
+            @RequestParam String description,
             @RequestParam String content,
             @RequestParam("file") MultipartFile picture) {
 
-        return ResponseEntity.ok(newsService.save(title, content, picture));
+        return ResponseEntity.ok(newsService.save(title, description, content, picture));
 
     }
 

@@ -25,6 +25,9 @@ public class News {
     private String slug;
 
     @Column(columnDefinition = "TEXT", nullable = false)
+    private String description;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
     private String thumbnailObjectKey;

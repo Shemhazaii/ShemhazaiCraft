@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/modpacks")
@@ -41,6 +42,11 @@ public class ModpackController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @GetMapping("/latest")
+    public ResponseEntity<List<ModpackResponse>> getLatest() {
+        return ResponseEntity.ok(modpackService.getLatest());
     }
 
     @GetMapping("/{id}/download")

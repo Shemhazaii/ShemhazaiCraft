@@ -25,7 +25,7 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public NewsDetailResponse save(String title, String content, MultipartFile picture) {
+    public NewsDetailResponse save(String title, String description, String content, MultipartFile picture) {
 
         String slug = title
                 .toLowerCase()
@@ -51,6 +51,7 @@ public class NewsServiceImpl implements NewsService{
 
         News news = new News();
         news.setTitle(title);
+        news.setDescription(description);
         news.setSlug(slug);
         news.setContent(content);
         news.setCreatedAt(Instant.now());

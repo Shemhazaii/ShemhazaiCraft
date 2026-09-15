@@ -1,6 +1,8 @@
 package com.shemhazaicraft.api.storage;
 
+
 import java.io.InputStream;
+
 
 public interface ObjectStorageService {
 
@@ -14,5 +16,6 @@ public interface ObjectStorageService {
     String generateDownloadUrl(
             String objectKey
     );
+
 
 }
