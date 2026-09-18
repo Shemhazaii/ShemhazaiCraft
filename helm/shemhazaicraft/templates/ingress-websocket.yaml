@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-websocket
+  namespace: minecraft
+  annotations:
+    nginx.ingress.kubernetes.io/websocket-services: "shemhazaicraft-api"
+    # Rewrite /api/ws menjadi /ws untuk Spring Boot
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /ws$2
+    # Connection Header & Timeouts
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - craft.shemhazai.my.id
+      secretName: shemhazaicraft-tls
+  rules:
+    - host: craft.shemhazai.my.id
+      http:
+        paths:
+          - path: /api/ws(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: shemhazaicraft-api
+                port:
+                  number: 8080

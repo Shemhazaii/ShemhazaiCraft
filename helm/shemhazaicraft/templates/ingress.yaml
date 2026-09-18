@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-api
+  namespace: minecraft
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      # Minta cert-manager buatkan sertifikat otomatis
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "2g"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - shemhazai.my.id
+      secretName: shemhazaicraft-tls
+  rules:
+    - host: craft.shemhazai.my.id
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: shemhazaicraft-api
+                port:
+                  number: 8080
+          - path: /storage(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: minio-storage
+                port:
+                  number: 9000

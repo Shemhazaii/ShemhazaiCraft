@@ -23,7 +23,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             StompEndpointRegistry registry
     ) {
         registry
-                .addEndpoint("/ws").setAllowedOriginPatterns("*");
+                .addEndpoint("/api/ws", "/ws")
+                .setAllowedOriginPatterns("*");
     }
 
 }
